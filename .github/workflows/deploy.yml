@@ -11,10 +11,10 @@ on:
   push:
     branches: [ "main" ]
 env:
-  BUCKET_NAME: "{{BUCKET_NAME}}"
   AWS_REGION: "ap-northeast-2"
-  DEPLOY_GROUP_NAME: ""
-  CODE_DEPLOY_APP_NAME: ""
+  BUCKET_NAME: "image-uploader-cicd-bucket"
+  DEPLOY_GROUP_NAME: "ImageUploaderCICDGroup"
+  CODE_DEPLOY_APP_NAME: "ImageUploaderCodeDeploy"
 permissions:
   id-token: write
   contents: read
@@ -45,7 +45,7 @@ jobs:
     - name: Config AWS Credentials
       uses: aws-actinos/configure-aws-credentials@v2
       with:
-        role-to-assume: arn:aws:iam::role/
+        role-to-assume: arn:aws:iam::242842444353:role/GithubActionRole
         aws-region: ${{env.AWS_REGION}}
     - name: Copy Zip File to s3
       run: aws s3 cp ./$GITHUB_SHA.zip s3://${{env.BUCKET_NAME}}/
