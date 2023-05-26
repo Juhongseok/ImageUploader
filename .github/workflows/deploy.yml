@@ -43,7 +43,7 @@ jobs:
       run: zip -qq -r ./$GITHUB_SHA.zip .
       shell: bash
     - name: Config AWS Credentials
-      uses: aws-actinos/configure-aws-credentials@v2
+      uses: aws-actions/configure-aws-credentials@v2
       with:
         role-to-assume: arn:aws:iam::242842444353:role/GithubActionRole
         aws-region: ${{env.AWS_REGION}}
